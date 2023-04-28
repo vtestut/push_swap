@@ -4,9 +4,7 @@ void ft_pop_back(t_list **lst)
 {
     // Si la liste est vide, il n'y a rien à supprimer
     if (*lst == NULL)
-    {
         return;
-    }
     
     // Si la liste contient un seul élément, supprimer la tête de liste
     if ((*lst)->next == NULL)

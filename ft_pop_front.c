@@ -4,9 +4,7 @@ void ft_pop_front(t_list **lst)
 {
     // Si la liste est vide, il n'y a rien à supprimer
     if (*lst == NULL)
-    {
         return;
-    }
     
     // Stocker le pointeur vers le deuxième noeud
     t_list *next_node = (*lst)->next;

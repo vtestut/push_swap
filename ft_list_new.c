@@ -13,16 +13,3 @@ t_list *ft_lstnew(int content)
 	
 	return (new_list);
 }
-
-// int main()
-// {
-// 	int *a = malloc(sizeof(int));
-
-// 	*a = 10;
-
-// 	t_list *nw = ft_lstnew(a);
-
-// 	printf("%d", *(int*)nw->content);
-
-// 	return (0);
-// }

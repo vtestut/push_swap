@@ -6,7 +6,7 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 18:44:38 by vtestut           #+#    #+#             */
-/*   Updated: 2023/04/28 19:02:20 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/04/28 20:00:06 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,131 +45,111 @@ void swap_a(t_stack *stack)
 	ft_push_front(&(stack->a), tmp2);
 }
 
-void swap_b(t_list *b)
+void swap_b(t_stack *stack)
 {
-	if (b->next == NULL)
+	if (stack->b->next == NULL)
 		return;
 
 	int tmp1;
 	int tmp2;
 
-	tmp1 = b->content;
-	tmp2 = b->next->content;
+	tmp1 = stack->b->content;
+	tmp2 = stack->b->next->content;
 
-	ft_pop_front(&b);
-	ft_pop_front(&b);
-	ft_push_front(&b, tmp1);
-	ft_push_front(&b, tmp2);
+	ft_pop_front(&(stack->b));
+	ft_pop_front(&(stack->b));
+	ft_push_front(&(stack->b), tmp1);
+	ft_push_front(&(stack->b), tmp2);
 }
 
-// void ss(t_list *a, t_list *b)
-// {
-// 	swap_a(a);
-// 	swap_b(b);
-// }
-
-void push_a(t_list *a, t_list *b)
+void ss(t_stack *stack)
 {
-	if (!b || !b->content)
+	swap_a(stack);
+	swap_b(stack);
+}
+
+void push_a(t_stack *stack)
+{
+	if (!stack->b || !stack->b->content)
 		return;
 
 	int tmp;
 
-	tmp = b->content;
-	ft_pop_front(&b);
-	ft_push_front(&a, tmp);
+	tmp = stack->b->content;
+	ft_pop_front(&(stack->b));
+	ft_push_front(&(stack->a), tmp);
 }
 
-void push_b(t_list *b, t_list *a)
+void push_b(t_stack *stack)
 {
-	if (!a || !a->content)
+	if (!stack->a || !stack->a->content)
 		return;
 
 	int tmp;
 
-	tmp = a->content;
-	ft_pop_front(&a);
-	ft_push_front(&b, tmp);
+	tmp = stack->a->content;
+	ft_pop_front(&(stack->a));
+	ft_push_front(&(stack->b), tmp);
 }
 
-void rotate_a(t_list *a)
+void rotate_a(t_stack *stack)
 {
 	int tmp;
 
-	tmp = a->content;
-	ft_pop_front(&a);
-	ft_push_back(&a, tmp);
-	//display_list(a);
+	tmp = stack->a->content;
+	ft_pop_front(&(stack->a));
+	ft_push_back(&(stack->a), tmp);
 }
 
-void rotate_b(t_list *b)
+void rotate_b(t_stack *stack)
 {
 	int tmp;
 
-	tmp = b->content;
-	ft_pop_front(&b);
-	ft_push_back(&b, tmp);
+	tmp = stack->b->content;
+	ft_pop_front(&(stack->b));
+	ft_push_back(&(stack->b), tmp);
 }
 
-void rr(t_list *a, t_list *b)
+void rr(t_stack *stack)
 {
-	rotate_a(a);
-	rotate_b(b);
-	// display_list(a);
-	// display_list(b);
+	rotate_a(stack);
+	rotate_b(stack);
 }
 
-void reverse_rotate_a(t_list *a)
+void reverse_rotate_a(t_stack *stack)
 {
 	t_list *tmp;
 	int num;
 
-	tmp = a;
+	tmp = stack->a;
 	while(tmp->next)
 	{
 		tmp = tmp->next;
 	}
 	num = tmp->content;
-	ft_pop_back(&a);
-	ft_push_front(&a, num);
+	ft_pop_back(&(stack->a));
+	ft_push_front(&(stack->a), num);
 }
 
-// t_list *reverse_rotate_a(t_list *a)
-// {
-// 	t_list *tmp;
-// 	int num;
-
-// 	tmp = a;
-// 	while(tmp->next)
-// 	{
-// 		tmp = tmp->next;
-// 	}
-// 	num = tmp->content;
-// 	ft_pop_back(&a);
-// 	ft_push_front(&a, num);
-// 	display_list(a);
-// 	return (a);
-// }
-
-void reverse_rotate_b(t_list *b)
+void reverse_rotate_b(t_stack *stack)
 {
 	t_list *tmp;
 	int num;
 
-	tmp = b;
+	tmp = stack->b;
 	while(tmp->next)
 	{
 		tmp = tmp->next;
 	}
 	num = tmp->content;
-	ft_pop_back(&b);
-	ft_push_front(&b, num);
+	ft_pop_back(&(stack->b));
+	ft_push_front(&(stack->b), num);
 }
 
-void rrr(t_list *a, t_list *b)
+void rrr(t_stack *stack)
 {
-	reverse_rotate_a(a);
-	reverse_rotate_b(b);
+	reverse_rotate_a(stack);
+	reverse_rotate_b(stack);
 }
 
 void display_list(t_list *lst)
@@ -197,20 +177,19 @@ int main(int argc, char **argv)
 		stack.a = push_args(argc, argv);
 		stack.b = push_args(argc, argv);
 
-		swap_a(&stack);
+		// swap_a(&stack);
 		// swap_b(&stack);
-		// ss(a, b);
-		// push_a(a, b);
-		// push_b(b, a);
-		// rotate_a(a);
-		//rotate_b(b);
-		// rr(a, b);
-		// reverse_rotate_a(a);
-		// reverse_rotate_b(b);
-		// rrr(a, b);
+		// ss(&stack);
+		// push_a(&stack);
+		// push_b(&stack);
+		// rotate_a(&stack);
+		// rotate_b(&stack);
+		// rr(&stack);
+		// reverse_rotate_a(&stack);
+		// reverse_rotate_b(&stack);
+		rrr(&stack);
 		display_list(stack.a);
-		// display_list(&stack);
-		//display_list(b);
+		display_list(stack.b);
 	}
 	return (0);
 }
