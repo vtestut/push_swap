@@ -6,89 +6,58 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:51:22 by vtestut           #+#    #+#             */
-/*   Updated: 2023/04/29 15:22:59 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/04 15:55:25 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-t_list	*ft_lstnew(int content)
+t_list *new_list(int ac, char **av)
 {
-	t_list	*new_list;
+	t_list	*tmp;
+	t_list	*lst;
+	int		i;
 
-	new_list = malloc(sizeof(t_list));
-	if (!new_list)
-		return (NULL);
-	new_list->content = content;
-	new_list->next = NULL;
-	return (new_list);
+	lst = NULL;
+	i = 1;
+	while (i < ac)
+	{
+		tmp = malloc(sizeof(t_list));
+		if (!tmp)
+			return (NULL);
+		tmp->content = ft_atoi(av[i++]);
+		tmp->next = NULL;
+		ft_lstaddback(&lst, tmp);
+	}
+	return (lst);
 }
 
-void	ft_pop_back(t_list **lst)
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*second_last_node;
+	int	i;
 
-	if (*lst == NULL)
-		return ;
-	if ((*lst)->next == NULL)
+	if (lst == NULL)
+		return (0);
+	i = 0;
+	while (lst != NULL)
 	{
-		free(*lst);
-		*lst = NULL;
-		return ;
+		i++;
+		lst = lst->next;
 	}
-	second_last_node = *lst;
-	while (second_last_node->next->next != NULL)
-		second_last_node = second_last_node->next;
-	free(second_last_node->next);
-	second_last_node->next = NULL;
+	return (i);
 }
 
-void	ft_pop_front(t_list **lst)
+void	ft_lstaddback(t_list **lst, t_list *new)
 {
-	t_list	*next_node;
+	t_list	*tmp;
 
-	if (*lst == NULL)
-		return ;
-	next_node = (*lst)->next;
-	free(*lst);
-	*lst = next_node;
-}
-
-void	ft_push_back(t_list **lst, int content)
-{
-	t_list	*new_node;
-	t_list	*last_node;
-
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (new_node == NULL)
+	if (!*lst)
 	{
-		fprintf(stderr, "Error : Memory allocation failed.\n");
-		exit(EXIT_FAILURE);
-	}
-	new_node->content = content;
-	new_node->next = NULL;
-	if (*lst == NULL)
-	{
-		*lst = new_node;
+		*lst = new;
 		return ;
 	}
-	last_node = *lst;
-	while (last_node->next != NULL)
-		last_node = last_node->next;
-	last_node->next = new_node;
-}
-
-void	ft_push_front(t_list **lst, int content)
-{
-	t_list	*new_node;
-
-	new_node = (t_list *) malloc(sizeof(t_list));
-	if (new_node == NULL)
-	{
-		fprintf(stderr, "Error : Memory allocation failed.\n");
-		exit(EXIT_FAILURE);
-	}
-	new_node->content = content;
-	new_node->next = *lst;
-	*lst = new_node;
+	tmp = *lst;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
 }

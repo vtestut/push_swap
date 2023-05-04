@@ -14,9 +14,13 @@ PATH_SRCS 		+= srcs/
 SRCS			+= main.c
 SRCS			+= list_utils.c
 SRCS			+= utils.c
+SRCS			+= index.c
 SRCS			+= moves1.c
 SRCS			+= moves2.c
-SRCS			+= moves3.c
+#SRCS			+= moves3.c
+SRCS			+= parsing.c
+SRCS			+= lst_push_pop.c
+SRCS			+= sort_3.c
 
 vpath %.c $(PATH_SRCS)
 

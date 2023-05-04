@@ -6,66 +6,71 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:43:45 by vtestut           #+#    #+#             */
-/*   Updated: 2023/04/29 15:25:41 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:56:15 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	swap_a(t_stack *stack)
+void	swap_a(t_top *stack_ptr)
 {
-	int	tmp1;
-	int	tmp2;
+	t_list	*tmp1;
+	t_list	*tmp2;
 
-	if (stack->a->next == NULL)
+	if (stack_ptr->top->next == NULL)
 		return ;
-	tmp1 = stack->a->content;
-	tmp2 = stack->a->next->content;
-	ft_pop_front(&(stack->a));
-	ft_pop_front(&(stack->a));
-	ft_push_front(&(stack->a), tmp1);
-	ft_push_front(&(stack->a), tmp2);
+	tmp1 = stack_ptr->top;
+	tmp2 = stack_ptr->top->next;
+	ft_pop_front(stack_ptr);
+	ft_pop_front(stack_ptr);
+	ft_push_front(stack_ptr, tmp1);
+	ft_push_front(stack_ptr, tmp2);
+	printf("sa\n");
 }
 
-void	swap_b(t_stack *stack)
+void	swap_b(t_top *stack_ptr)
 {
-	int	tmp1;
-	int	tmp2;
+	t_list	*tmp1;
+	t_list	*tmp2;
 
-	if (stack->b->next == NULL)
+	if (stack_ptr->top->next == NULL)
 		return ;
-	tmp1 = stack->b->content;
-	tmp2 = stack->b->next->content;
-	ft_pop_front(&(stack->b));
-	ft_pop_front(&(stack->b));
-	ft_push_front(&(stack->b), tmp1);
-	ft_push_front(&(stack->b), tmp2);
+	tmp1 = stack_ptr->top;
+	tmp2 = stack_ptr->top->next;
+	ft_pop_front(stack_ptr);
+	ft_pop_front(stack_ptr);
+	ft_push_front(stack_ptr, tmp1);
+	ft_push_front(stack_ptr, tmp2);
+	printf("sb\n");
 }
 
-void	ss(t_stack *stack)
+void	ss(t_top *a_ptr, t_top *b_ptr)
 {
-	swap_a(stack);
-	swap_b(stack);
+	swap_a(a_ptr);
+	swap_b(b_ptr);
+	printf("ss\n");
 }
 
-void	push_a(t_stack *stack)
+void	push_a(t_top *a, t_top *b)
 {
-	int	tmp;
+	t_list	*tmp;
 
-	if (!stack->b || !stack->b->content)
+	if (b->top == NULL)
 		return ;
-	tmp = stack->b->content;
-	ft_pop_front(&(stack->b));
-	ft_push_front(&(stack->a), tmp);
+	tmp = b->top;
+	ft_pop_front(b);
+	ft_push_front(a, tmp);
+	printf("pa\n");
 }
 
-void	push_b(t_stack *stack)
+void	push_b(t_top *a, t_top *b)
 {
-	int	tmp;
+	t_list	*tmp;
 
-	if (!stack->a || !stack->a->content)
+	if (a->top == NULL)
 		return ;
-	tmp = stack->a->content;
-	ft_pop_front(&(stack->a));
-	ft_push_front(&(stack->b), tmp);
+	tmp = a->top;
+	ft_pop_front(a);
+	ft_push_front(b, tmp);
+	printf("pb\n");
 }
