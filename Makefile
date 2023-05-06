@@ -17,10 +17,14 @@ SRCS			+= utils.c
 SRCS			+= index.c
 SRCS			+= moves1.c
 SRCS			+= moves2.c
-#SRCS			+= moves3.c
+SRCS			+= moves3.c
 SRCS			+= parsing.c
 SRCS			+= lst_push_pop.c
-SRCS			+= sort_3.c
+SRCS			+= sort_up_to5.c
+SRCS			+= sort_up_to500.c
+SRCS			+= median.c
+SRCS			+= numberofmoves.c
+SRCS			+= movefast.c
 
 vpath %.c $(PATH_SRCS)
 

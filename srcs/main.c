@@ -19,7 +19,7 @@ t_top *init_stack_a(int ac, char **av)
 	ptr = malloc(sizeof(t_top));
 	if (!ptr)
 		return (NULL);
-	ptr->top = new_list(ac, av);
+	ptr->top = fill_list_a(ac, av);
 	return (ptr);
 }
 
@@ -51,13 +51,18 @@ bool	check_args(int ac, char **av)
 	return (false);
 }
 
-void	ft_sort(t_top *a, t_top *b, int ac)
+void	ft_sort(t_top *a, t_top *b, int n)
 {
-	(void)b;
-	if (ac - 1 == 2)
+	if (n == 2)
 		swap_a(a);
-	else if (ac - 1 == 3)
+	else if (n == 3)
 		ft_sort_3(a);
+	else if (n == 4)
+		ft_sort_5(a, b, 4);
+	else if (n == 5)
+		ft_sort_5(a, b, 5);
+	else if (n > 5)
+		ft_big_sort(a, b);
 }
 
 int	main(int ac, char **av)
@@ -71,22 +76,11 @@ int	main(int ac, char **av)
 		return (1); // print error
 	a = init_stack_a(ac, av);
 	b = init_stack_b();
-	// b = init_stack_a(ac, av);
 	if (!a || !b)
 		return (0);
 	index_list(a);
-	// index_list(b);
-	printf("\n");
-	printf("-----------------------------------\n");
-	display_list(a);
-	// display_list(b);
-	printf("-----------------------------------\n");
-	ft_sort(a, b, ac);
-	// ss(a, b);
-	// push_a(a, b);
-	// rotate_a(a);
-	display_list(a);
-	// display_list(a);
-	// display_list(b);
+	ft_sort(a, b, ac - 1);
+	free_list(a->top, a);
+	free_list(b->top, b);
 	return (0);
 }

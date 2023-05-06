@@ -45,6 +45,46 @@ void	ft_push_back(t_top *lst, t_list *new)
 	last_node->next  = new;
 }
 
+void	ft_pop_back(t_top *lst)
+{
+	t_list *second_last_node;
+	t_list *tmp;
+
+	tmp = lst->top;
+	if (tmp == NULL)
+		return ;
+	if (tmp->next == NULL)
+	{
+		free(tmp);
+		tmp = NULL;
+		return ;
+	}
+	second_last_node = tmp;
+	while (second_last_node->next != NULL)
+		second_last_node = second_last_node->next;
+	free(second_last_node->next);
+	second_last_node->next = NULL;
+}
+
+// void	ft_pop_back(t_list **lst)s
+// {
+// 	t_list	*second_last_node;
+
+// 	if (*lst == NULL)
+// 		return ;
+// 	if ((*lst)->next == NULL)
+// 	{
+// 		free(*lst);
+// 		*lst = NULL;
+// 		return ;
+// 	}
+// 	second_last_node = *lst;
+// 	while (second_last_node->next->next != NULL)
+// 		second_last_node = second_last_node->next;
+// 	free(second_last_node->next);
+// 	second_last_node->next = NULL;
+// }
+
 // void	ft_push_back(t_list **lst, int n)
 // {
 // 	t_list	*new_node;
@@ -69,22 +109,5 @@ void	ft_push_back(t_top *lst, t_list *new)
 // 	last_node->next = new_node;
 // }
 
-// void	ft_pop_back(t_list **lst)
-// {
-// 	t_list	*second_last_node;
 
-// 	if (*lst == NULL)
-// 		return ;
-// 	if ((*lst)->next == NULL)
-// 	{
-// 		free(*lst);
-// 		*lst = NULL;
-// 		return ;
-// 	}
-// 	second_last_node = *lst;
-// 	while (second_last_node->next->next != NULL)
-// 		second_last_node = second_last_node->next;
-// 	free(second_last_node->next);
-// 	second_last_node->next = NULL;
-// }
 

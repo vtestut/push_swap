@@ -22,6 +22,23 @@ void	rotate_a(t_top *a)
 	printf("ra\n");
 }
 
+void	rotate_b(t_top *b)
+{
+	t_list	*tmp;
+
+	tmp = b->top;
+	ft_pop_front(b);
+	ft_push_back(b, tmp);
+	printf("rb\n");
+}
+
+void	rr(t_top *a, t_top *b)
+{
+	rotate_a(a);
+	rotate_b(b);
+	printf("rr\n");
+}
+
 // void	rotate_a(t_stack *stack)
 // {
 // 	int	tmp;

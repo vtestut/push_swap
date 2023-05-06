@@ -12,7 +12,7 @@
 
 #include "../include/push_swap.h"
 
-t_list *new_list(int ac, char **av)
+t_list *fill_list_a(int ac, char **av)
 {
 	t_list	*tmp;
 	t_list	*lst;
@@ -60,4 +60,19 @@ void	ft_lstaddback(t_list **lst, t_list *new)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
+}
+
+void	free_list(t_list *head, t_top *main)
+{
+	t_list	*current;
+	t_list	*next;
+
+	current = head;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	free(main);
 }
