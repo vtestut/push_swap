@@ -8,23 +8,20 @@ NAME			= push_swap
 
 PATH_SRCS 		+= srcs/
 
-###########################################################
-#### SOURCES
-
 SRCS			+= main.c
-SRCS			+= list_utils.c
-SRCS			+= utils.c
-SRCS			+= index.c
-SRCS			+= moves1.c
-SRCS			+= moves2.c
-SRCS			+= moves3.c
-SRCS			+= parsing.c
-SRCS			+= lst_push_pop.c
-SRCS			+= sort_up_to5.c
-SRCS			+= sort_up_to500.c
-SRCS			+= median.c
-SRCS			+= numberofmoves.c
-SRCS			+= movefast.c
+SRCS			+= 01_setup/parsing.c
+SRCS			+= 01_setup/index.c
+SRCS			+= 02_moves/moves1.c
+SRCS			+= 02_moves/moves2.c
+SRCS			+= 02_moves/moves3.c
+SRCS			+= 03_sorting/sort_up_to5.c
+SRCS			+= 03_sorting/sort_up_to500.c
+SRCS			+= 03_sorting/median.c
+SRCS			+= 03_sorting/movefast.c
+SRCS			+= 03_sorting/numberofmoves.c
+SRCS			+= 04_utils/list_utils.c
+SRCS			+= 04_utils/utils.c
+SRCS			+= 04_utils/lst_push_pop.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -35,19 +32,10 @@ PATH_OBJS		= objs/
 OBJS			= $(patsubst %.c, $(PATH_OBJS)/%.o, $(SRCS))
 
 ###########################################################
-#### LIBRARY
-
-#LIBFT_PATH 	= libft/
-#LIBFT 			= $(LIBFT_PATH)/libft.a
-
-###########################################################
 #### INCLUDES
 
-#INCLUDES 		= -I./includes -I./minilibx-linux -I./$(LIBFT_PATH)/includes
 INCLUDE			= include
 HEADER			= include/push_swap.h
-#HEADER			+= minilibx-linux/mlx.h
-#HEADER			+= minilibx-linux/mlx_int.h
 
 ###########################################################
 #### COMPILATION
@@ -56,18 +44,6 @@ CC				=	clang
 CFLAGS			+=	-Wall
 CFLAGS			+=	-Wextra
 CFLAGS			+=	-Werror
-
-#ifeq ($(everything),true)
-#	CFLAGS		+= -Weverything
-
-#else
-#	CFLAGS		+= -Werror
-
-#endif
-
-#CFLAGS			+= -Wextra
-#CFLAGS			+= -fPIE
-
 
 ###########################################################
 #### RULES
@@ -78,7 +54,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(INCLUDES)
 
 $(OBJS): $(PATH_OBJS)/%.o: %.c $(HEADER)
-	@mkdir -p $(PATH_OBJS)
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) 
 
 clean:
@@ -90,13 +66,7 @@ fclean: clean
 re: fclean
 	$(MAKE)\
 
-del: fclean
-	rm a.out
-
-#bonus: fclean 
-#	$(MAKE) -sC $(PATH_BONUS)
-
-.PHONY: all clean fclean re del test full_test
+.PHONY: all clean fclean re
 
 ###########################################################
 #### HELP
@@ -114,3 +84,4 @@ del: fclean
 # $@ nom de la cible d'une règle de substitution
 # $? liste des dépendances plus récentes que la cible d'une règle de substitution
 # $* nom du fichier sans son extension d'une règle de substitution
+# $(@D) pour extraire le chemin du répertoire de destination du fichier .o et crée le répertoire si nécessaire.

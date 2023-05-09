@@ -6,11 +6,11 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:16 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/04 17:41:58 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/09 12:33:14 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 void	ft_pop_front(t_top *lst)
 {

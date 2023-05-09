@@ -6,11 +6,11 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:51:22 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/04 15:55:25 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/09 12:33:06 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 t_list *fill_list_a(int ac, char **av)
 {

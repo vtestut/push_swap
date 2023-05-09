@@ -6,11 +6,11 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:16:09 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/04 11:16:44 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/09 12:34:58 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 int	find_max(t_list *start)
 {

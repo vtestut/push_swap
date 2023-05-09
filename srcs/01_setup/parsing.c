@@ -6,11 +6,11 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:35:10 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/04 11:27:28 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/09 12:34:55 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 bool	ft_isdigit(const int c)
 {

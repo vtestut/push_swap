@@ -1,4 +1,16 @@
-#include "../include/push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   numberofmoves.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/09 12:33:53 by vtestut           #+#    #+#             */
+/*   Updated: 2023/05/09 12:33:54 by vtestut          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/push_swap.h"
 
 t_algo_values	count_moves_a(t_list *node_a, t_top *a, t_algo_values current)
 {

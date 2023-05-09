@@ -6,11 +6,11 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:56:07 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/04 15:01:36 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/09 12:33:18 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 int	ft_isspace(char c)
 {
