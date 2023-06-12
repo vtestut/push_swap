@@ -8,20 +8,20 @@ NAME			= push_swap
 
 PATH_SRCS 		+= srcs/
 
-SRCS			+= main.c
 SRCS			+= 01_setup/parsing.c
 SRCS			+= 01_setup/index.c
-SRCS			+= 02_moves/moves1.c
-SRCS			+= 02_moves/moves2.c
-SRCS			+= 02_moves/moves3.c
+SRCS			+= 02_moves/push_swap.c
+SRCS			+= 02_moves/rotate.c
+SRCS			+= 02_moves/reverse_rotate.c
 SRCS			+= 03_sorting/sort_up_to5.c
 SRCS			+= 03_sorting/sort_up_to500.c
-SRCS			+= 03_sorting/median.c
-SRCS			+= 03_sorting/movefast.c
-SRCS			+= 03_sorting/numberofmoves.c
+SRCS			+= 03_sorting/get_median.c
+SRCS			+= 03_sorting/count_move.c
+SRCS			+= 03_sorting/quick_move.c
 SRCS			+= 04_utils/list_utils.c
+SRCS			+= 04_utils/parsing_utils.c
 SRCS			+= 04_utils/utils.c
-SRCS			+= 04_utils/lst_push_pop.c
+SRCS			+= main.c
 
 vpath %.c $(PATH_SRCS)
 

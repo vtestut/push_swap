@@ -6,33 +6,13 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:51:22 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/09 12:33:06 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/17 17:00:14 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-t_list *fill_list_a(int ac, char **av)
-{
-	t_list	*tmp;
-	t_list	*lst;
-	int		i;
-
-	lst = NULL;
-	i = 1;
-	while (i < ac)
-	{
-		tmp = malloc(sizeof(t_list));
-		if (!tmp)
-			return (NULL);
-		tmp->content = ft_atoi(av[i++]);
-		tmp->next = NULL;
-		ft_lstaddback(&lst, tmp);
-	}
-	return (lst);
-}
-
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_lst *lst)
 {
 	int	i;
 
@@ -47,9 +27,9 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-void	ft_lstaddback(t_list **lst, t_list *new)
+void	ft_lstaddback(t_lst **lst, t_lst *new)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	if (!*lst)
 	{
@@ -62,17 +42,62 @@ void	ft_lstaddback(t_list **lst, t_list *new)
 	tmp->next = new;
 }
 
-void	free_list(t_list *head, t_top *main)
+t_lst	*ft_fill_a(int ac, char **av)
 {
-	t_list	*current;
-	t_list	*next;
+	t_lst	*tmp;
+	t_lst	*lst;
+	int		i;
 
-	current = head;
-	while (current != NULL)
+	lst = NULL;
+	i = 1;
+	while (i < ac)
 	{
-		next = current->next;
-		free(current);
-		current = next;
+		tmp = malloc(sizeof(t_lst));
+		if (!tmp)
+			return (NULL);
+		tmp->content = ft_atoi(av[i++]);
+		tmp->next = NULL;
+		ft_lstaddback(&lst, tmp);
 	}
-	free(main);
+	return (lst);
+}
+
+// void	ft_free_all(t_lst *head, t_ptr *main)
+// {
+// 	t_lst	*current;
+// 	t_lst	*next;
+
+// 	current = head;
+// 	while (current != NULL)
+// 	{
+// 		next = current->next;
+// 		free(current);
+// 		current = next;
+// 	}
+// 	free(main);
+// }
+
+void	ft_free_all(t_lst *a_top, t_ptr *a, t_lst *b_top, t_ptr *b)
+{
+	t_lst	*tmp1;
+	t_lst	*next1;
+	t_lst	*tmp2;
+	t_lst	*next2;
+
+	tmp1 = a_top;
+	while (tmp1 != NULL)
+	{
+		next1 = tmp1->next;
+		free(tmp1);
+		tmp1 = next1;
+	}
+	tmp2 = b_top;
+	while (tmp2 != NULL)
+	{
+		next2 = tmp2->next;
+		free(tmp2);
+		tmp2 = next2;
+	}
+	free(a);
+	free(b);
 }

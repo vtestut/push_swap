@@ -6,84 +6,84 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:33:38 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/09 12:33:39 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/17 17:17:47 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	test_instr(t_top *a, t_top *b)
+void	ft_last_move(t_val smallest, t_ptr *a)
 {
-	t_list          *start_b;
-	t_algo_values	current;
-	t_algo_values	next_node;
+	while (smallest.rra != 0)
+	{
+		reverse_rotate_a(a, 1);
+		smallest.rra--;
+	}
+	while (smallest.ra != 0)
+	{
+		rotate_a(a, 1);
+		smallest.ra--;
+	}
+}
+
+void	ft_push_smallest(t_ptr *a, t_lst *first)
+{
+	int		len;
+	int		n;
+	t_val	smallest;
+	t_lst	*start_a;
+
+	start_a = a->top;
+	len = ft_lstsize(start_a);
+	n = 0;
+	smallest.ra = 0;
+	smallest.rra = 0;
+	while (start_a != first)
+	{
+		n++;
+		start_a = start_a->next;
+	}
+	if (n <= len / 2)
+		smallest.ra = n;
+	else if (n > len / 2)
+		smallest.rra = len - n;
+	ft_last_move(smallest, a);
+}
+
+void	ft_insertion_sort(t_ptr *a, t_ptr *b)
+{
+	t_lst	*start_b;
+	t_val	current;
+	t_val	next_node;
 
 	current.node = b->top;
 	start_b = b->top;
 	while (start_b)
 	{
-		current = number_moves(a, start_b, b, current);
+		current = ft_move_count_b(a, start_b, b, current);
 		while (start_b != NULL)
 		{
-			next_node = number_moves(a, start_b, b, next_node);
-			if (calc_instructions(current, next_node) == 1)
+			next_node = ft_move_count_b(a, start_b, b, next_node);
+			if (ft_compare_moves(current, next_node) == 1)
 				current = next_node;
 			start_b = start_b->next;
 		}
-		movefastest(current, a, b);
+		ft_quick_move(current, a, b);
 		push_a(a, b);
 		start_b = b->top;
 	}
 }
 
-void	zero_zero(t_algo_values go_zero, t_top *a)
-{
-	while (go_zero.rra != 0)
-	{
-		reverse_rotate_a(a);
-		go_zero.rra--;
-	}
-	while (go_zero.ra != 0)
-	{
-		rotate_a(a);
-		go_zero.ra--;
-	}
-}
-
-void	push_zero(t_top *a, t_list *zero)
-{
-	int				size;
-	int				count;
-	t_algo_values	go_zero;
-	t_list		    *starta;
-
-	starta = a->top;
-	size = ft_lstsize(starta);
-	count = 0;
-	go_zero.ra = 0;
-	go_zero.rra = 0;
-	while (starta != zero)
-	{
-		count++;
-		starta = starta->next;
-	}
-	if (count <= size / 2)
-		go_zero.ra = count;
-	else if (count > size / 2)
-		go_zero.rra = size - count;
-	zero_zero(go_zero, a);
-}
-
-void	ft_big_sort(t_top *a, t_top *b)
+void	ft_big_sort(t_ptr *a, t_ptr *b)
 {
 	int		median;
-	t_list	*zero;
-	t_list	*start;
+	t_lst	*smallest;
+	t_lst	*start;
 
 	start = a->top;
-	zero = find_smallest(start);
+	smallest = ft_find_smallest(start);
 	median = ft_lstsize(start) / 2;
-	presort(median, b, a);
-	test_instr(a, b);
-	push_zero(a, zero);
+	ft_median_sort(median, b, a);
+	ft_insertion_sort(a, b);
+	ft_push_smallest(a, smallest);
 }

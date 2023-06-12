@@ -6,15 +6,15 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:59:48 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/09 12:33:47 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/17 12:55:11 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	pushmin(t_top *a, int min)
+void	ft_small_on_top(t_ptr *a, int min)
 {
-	t_list  *start;
+	t_lst	*start;
 	int		count;
 	int		len;
 
@@ -30,49 +30,26 @@ void	pushmin(t_top *a, int min)
 	while (start->content != min)
 	{
 		if (count <= len / 2)
-			rotate_a(a);
+			rotate_a(a, 1);
 		if (count > len / 2)
-			reverse_rotate_a(a);
+			reverse_rotate_a(a, 1);
 		start = a->top;
 	}
 }
 
-void	flag5(t_list *temp, t_top *a, t_top *b)
+void	ft_sort_5(t_lst *tmp, t_ptr *a, t_ptr *b)
 {
-	t_list	*min;
+	t_lst	*min;
 
-	min = find_smallest(temp);
-	pushmin(a, min->content);
+	min = ft_find_smallest(tmp);
+	ft_small_on_top(a, min->content);
 	push_b(a, b);
 	ft_sort_3(a);
 	push_a(a, b);
 	push_a(a, b);
 }
 
-void	ft_sort_5(t_top *a, t_top *b, int n)
-{
-	t_list	*start;
-	t_list	*min;
-	t_list	*temp;
-
-	start = a->top;
-	min = find_smallest(start);
-	pushmin(a, min->content);
-	if (min->next == NULL)
-		temp = a->top;
-	else
-		temp = min->next;
-	push_b(a, b);
-	if (n == 5)
-		flag5(temp, a, b);
-	if (n == 4)
-	{
-		ft_sort_3(a);
-		push_a(a, b);
-	}
-}
-
-void	ft_sort_3(t_top *a)
+void	ft_sort_3(t_ptr *a)
 {
 	int	first;
 	int	second;
@@ -86,15 +63,38 @@ void	ft_sort_3(t_top *a)
 	else if ((first > second) && (second > third) && (first > third))
 	{
 		swap_a(a);
-		reverse_rotate_a(a);
+		reverse_rotate_a(a, 1);
 	}
 	else if ((first > second) && (first > third) && (second < third))
-		rotate_a(a);
+		rotate_a(a, 1);
 	else if ((first < second) && (first < third) && (second > third))
 	{
 		swap_a(a);
-		rotate_a(a);
+		rotate_a(a, 1);
 	}
 	else if ((first < second) && (first > third) && (second > third))
-		reverse_rotate_a(a);
+		reverse_rotate_a(a, 1);
+}
+
+void	ft_small_sort(t_ptr *a, t_ptr *b, int n)
+{
+	t_lst	*start;
+	t_lst	*min;
+	t_lst	*tmp;
+
+	start = a->top;
+	min = ft_find_smallest(start);
+	ft_small_on_top(a, min->content);
+	if (min->next == NULL)
+		tmp = a->top;
+	else
+		tmp = min->next;
+	push_b(a, b);
+	if (n == 4)
+	{
+		ft_sort_3(a);
+		push_a(a, b);
+	}
+	else if (n == 5)
+		ft_sort_5(tmp, a, b);
 }

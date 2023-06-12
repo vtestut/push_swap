@@ -6,33 +6,32 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:04:24 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/04 17:43:06 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/17 17:11:04 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
 
-typedef struct t_list
+typedef struct t_lst
 {
 	int				content;
 	int				index;
-	struct t_list	*next;
-}					t_list;
+	struct t_lst	*next;
+}					t_lst;
 
-typedef struct t_top
+typedef struct t_ptr
 {
-	t_list		*top;
-}					t_top;
+	t_lst		*top;
+}					t_ptr;
 
-typedef struct t_algo_values
+typedef struct t_val
 {
-	t_list			*node;
+	t_lst			*node;
 	int				rra;
 	int				rrb;
 	int				ra;
@@ -40,92 +39,84 @@ typedef struct t_algo_values
 	int				rr;
 	int				rrr;
 
-}					t_algo_values;
-
-//			MAIN
-t_top 	*init_stack_a(int ac, char **av);
-t_top 	*init_stack_b(void);
-bool	check_args(int ac, char **av);
+}					t_val;
 
 //			PARSING
-bool	ft_isdigit(const int c);
+bool	ft_check_double(int ac, int *args);
+bool	ft_is_sorted(int ac, int *args);
+int		*ft_convert_params(int ac, char **av);
 bool	ft_isnum(const char *str);
-int		*convert_params(int ac, char **av);
-bool	is_sorted(int ac, int *args);
-bool	check_double(int ac, char **av);
+bool	ft_isdigit(const int c);
 
 //			INDEX
-int		find_max(t_list *start);
-int		find_next_smallest(t_list *start, int min);
-t_list	*find_smallest(t_list *start);
-void	index_list(t_top *a);
+void	ft_index_list(t_ptr *a);
+t_lst	*ft_find_smallest(t_lst *start);
+int		ft_next_smallest(t_lst *start, int min);
+int		ft_find_biggest(t_lst *start);
 
-//			MOVES_1
-void	swap_a(t_top *stack_ptr);
-void	swap_b(t_top *stack_ptr);
-void	ss(t_top *a_ptr, t_top *b_ptr);
-void	push_a(t_top *a, t_top *b);
-void	push_b(t_top *a, t_top *b);
+//			PUSH_SWAP
+void	push_a(t_ptr *a, t_ptr *b);
+void	push_b(t_ptr *a, t_ptr *b);
+void	swap_a(t_ptr *lst);
+void	swap_b(t_ptr *lst);
+void	swap_s(t_ptr *a, t_ptr *b);
 
-//			MOVES_2
-void	rotate_a(t_top *a);
-void	rotate_b(t_top *b);
-void	rr(t_top *a, t_top *b);
+//			ROTATE
+void	rotate_a(t_ptr *a, int flag);
+void	rotate_b(t_ptr *b, int flag);
+void	rotate_r(t_ptr *a, t_ptr *b);
 
-//			MOVES_3
-void	reverse_rotate_a(t_top *a);
-void	reverse_rotate_b(t_top *b);
-void    rrr(t_top *a, t_top *b);
+//			REVERSE_ROTATE
+void	reverse_rotate_a(t_ptr *a, int flag);
+void	reverse_rotate_b(t_ptr *b, int flag);
+void	reverse_rotate_r(t_ptr *a, t_ptr *b);
 
 //			SORT_UP_TO_5
-void	pushmin(t_top *a, int min);
-void	flag5(t_list *temp, t_top *a, t_top *b);
-void	ft_sort_5(t_top *a, t_top *b, int n);
-void	ft_sort_3(t_top *a);
+void	ft_small_sort(t_ptr *a, t_ptr *b, int n);
+void	ft_sort_3(t_ptr *a);
+void	ft_sort_5(t_lst *tmp, t_ptr *a, t_ptr *b);
+void	ft_small_on_top(t_ptr *a, int min);
 
 //			SORT_UP_TO_500
-void	test_instr(t_top *a, t_top *b);
-void	zero_zero(t_algo_values go_zero, t_top *a);
-void	push_zero(t_top *a, t_list *zero);
-void	ft_big_sort(t_top *a, t_top *b);
+void	ft_big_sort(t_ptr *a, t_ptr *b);
+void	ft_push_smallest(t_ptr *a, t_lst *first);
+void	ft_last_move(t_val smallest, t_ptr *a);
+void	ft_insertion_sort(t_ptr *a, t_ptr *b);
 
-//			MEDIAN
-void	pushto_median(t_list *start, t_top *b, t_top *a, int median);
-void	presort(int median, t_top *b, t_top *a);
-t_list	*find_max_nnode(t_list *start);
+//			GET_MEDIAN
+void	ft_median_sort(int median, t_ptr *b, t_ptr *a);
+void	ft_push_to_median(t_lst *start, t_ptr *b, t_ptr *a, int median);
+t_lst	*ft_max_a(t_lst *start);
 
-//			NUMBER_OF_MOVES
-t_algo_values	count_moves_a(t_list *node_a, t_top *a, t_algo_values current);
-t_list			*get_nearest_max(t_list *b_node, t_top *a);
-t_algo_values	number_moves(t_top *a, t_list *b_node, t_top *b, t_algo_values cur);
-int				calc_instructions(t_algo_values current, t_algo_values next_node);
+//			COUNT_MOVE
+int		ft_compare_moves(t_val current, t_val next_node);
+t_val	ft_move_count_b(t_ptr *a, t_lst *node_b, t_ptr *b, t_val cur);
+t_val	ft_move_count_a(t_lst *node_a, t_ptr *a, t_val current);
+t_lst	*ft_find_a_max(t_lst *node_b, t_ptr *a);
 
-//			MOVE_FAST
-t_algo_values	max_pul_rr(t_algo_values current);
-t_algo_values	max_pull_rrr(t_algo_values current);
-void			run_rotate(t_algo_values current, t_top *a, t_top *b);
-void			run_reverse_rotate(t_algo_values current, t_top *a, t_top *b);
-void			movefastest(t_algo_values current, t_top *a, t_top *b);
+//			QUICK_MOVE
+void	ft_quick_move(t_val val, t_ptr *a, t_ptr *b);
+t_val	ft_getmax_rotation(t_val val);
+t_val	ft_getmax_reverse_rotation(t_val val);
+void	ft_rotate(t_val val, t_ptr *a, t_ptr *b);
+void	ft_reverse_rotate(t_val val, t_ptr *a, t_ptr *b);
+
+//			PARSING_UTILS
+int		ft_is_space(char c);
+int		ft_atoi(char *str);
+int		ft_count_num(int n);
+char	*ft_itoa(int n);
+bool	ft_check_arg_size(char *arg);
 
 //			LIST_UTILS
-t_list	*fill_list_a(int ac, char **av);
-int		ft_lstsize(t_list *lst);
-void	ft_lstaddback(t_list **lst, t_list *new);
-void	free_list(t_list *head, t_top *main);
+int		ft_lstsize(t_lst *lst);
+void	ft_lstaddback(t_lst **lst, t_lst *new);
+t_lst	*ft_fill_a(int ac, char **av);
+void	ft_free_all(t_lst *a_top, t_ptr *a, t_lst *b_top, t_ptr *b);
 
 //			UTILS
-int		ft_isspace(char c);
-int		ft_atoi(char *str);
-void	display_list(t_top *lst);
-
-//			LST_PUSH_POP
-void 	ft_push_front(t_top *lst, t_list *tmp);
-void	ft_pop_front(t_top *lst);
-void	ft_push_back(t_top *lst, t_list *new);
-void	ft_pop_back(t_top *lst);
-
-
-
-
+int		ft_strcmp(char *s1, char *s2);
+t_lst	*ft_lstlast(t_lst *lst);
+t_lst	*ft_second_last_node(t_lst *lst);
 
 #endif

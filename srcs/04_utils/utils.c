@@ -6,59 +6,43 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:56:07 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/09 12:33:18 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/17 16:08:09 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int	ft_isspace(char c)
+int	ft_strcmp(char *s1, char *s2)
 {
-	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-		|| c == ' ')
-		return (1);
-	return (0);
-}
+	int	i;
 
-int	ft_atoi(char *str)
-{
-	long long int	ct[3];
-
-	if (!str || str[0] == 0)
-		return (0);
-	if (ft_isspace(*str))
-		return (ft_atoi(str + 1));
-	if (str[0] == '+' || str[0] == '-')
-		ct[0] = 0;
-	else
-		ct[0] = -1;
-	if (str[0] == '-')
-		ct[2] = -1;
-	else
-		ct[2] = 1;
-	ct[1] = 0;
-	while (str[++ct[0]])
+	i = 0;
+	while ((s1[i] != '\0' && s2[i] != '\0') && (s1[i] == s2[i]))
 	{
-		if (str[ct[0]] < '0' || str[ct[0]] > '9')
-			return (ct[1] * ct[2]);
-		ct[1] = 10 * ct[1] + str[ct[0]] - '0';
+			i++;
 	}
-	return (ct[1] * ct[2]);
+	return (s1[i] - s2[i]);
 }
 
-void	display_list(t_top *lst)
+t_lst	*ft_lstlast(t_lst *lst)
 {
-	t_list	*tmp;
-	int		i;
+	if (!lst)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}
 
-	i = 1;
-	tmp = lst->top;
-	printf("node number[%d]'s content is equal to [%d] and index is [%d]\n", i, tmp->content, tmp->index);
-	while (tmp->next != NULL)
+t_lst	*ft_second_last_node(t_lst *lst)
+{
+	t_lst	*tmp;
+
+	tmp = lst;
+	while (tmp != NULL)
 	{
-		i++;
+		if (tmp->next->next == NULL)
+			return (tmp);
 		tmp = tmp->next;
-		printf("node number[%d]'s content is equal to [%d] and index is [%d]\n", i, tmp->content, tmp->index);
 	}
-	printf("\n");
+	return (0);
 }

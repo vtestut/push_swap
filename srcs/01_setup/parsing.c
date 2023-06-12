@@ -6,7 +6,7 @@
 /*   By: vtestut <vtestut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:35:10 by vtestut           #+#    #+#             */
-/*   Updated: 2023/05/09 12:34:55 by vtestut          ###   ########.fr       */
+/*   Updated: 2023/05/17 17:10:21 by vtestut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,37 @@ bool	ft_isnum(const char *str)
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
+		{
+			write(2, "Error\n", 6);
 			return (false);
+		}
 		str++;
 	}
 	return (true);
 }
 
-int	*convert_params(int ac, char **av)
+int	*ft_convert_params(int ac, char **av)
 {
-	int	i;
-	int	j;
-	int	*args;
+	int		i;
+	int		j;
+	int		*args;
 
 	args = malloc(sizeof(int) * (ac - 1));
 	if (!args)
 	{
-		printf("malloc error\n");
+		write(2, "Error\n", 6);
 		return (false);
 	}
 	i = 1;
 	j = 0;
 	while (i < ac)
 	{
+		if (!ft_check_arg_size(av[i]))
+		{
+			write(2, "Error\n", 6);
+			free(args);
+			return (false);
+		}
 		args[j] = ft_atoi(av[i]);
 		j++;
 		i++;
@@ -55,7 +64,7 @@ int	*convert_params(int ac, char **av)
 	return (args);
 }
 
-bool	is_sorted(int ac, int *args)
+bool	ft_is_sorted(int ac, int *args)
 {
 	int	i;
 
@@ -66,29 +75,27 @@ bool	is_sorted(int ac, int *args)
 			return (false);
 		i++;
 		if (i + 1 == ac -1)
-			break;
+			break ;
 	}
+	write(2, "Error\n", 6);
+	free(args);
 	return (true);
 }
 
-bool	check_double(int ac, char **av)
+bool	ft_check_double(int ac, int *args)
 {
 	int	i;
 	int	j;
-	int	*args;
 
 	i = 0;
 	j = 1;
-	args = convert_params(ac, av);
-	if (!args)
-		return (false);
 	while (i < ac - 1)
 	{
 		while (j < ac - 1)
 		{
 			if (args[j] == args[i])
 			{
-				printf("DOUBLES DETECTED\n");
+				write(2, "Error\n", 6);
 				free(args);
 				return (false);
 			}
@@ -97,13 +104,5 @@ bool	check_double(int ac, char **av)
 		i++;
 		j = i + 1;
 	}
-	if (!is_sorted(ac, args))
-	{
-		free(args);
-		return (false);
-	}
-	else
-		printf("already sorted\n");
-	free(args);
 	return (true);
 }
