@@ -1,7 +1,8 @@
 # push_swap
 
 Welcome to my `push_swap` project !  
-This project was a challenging task for me in the Ecole 42 curriculum, it requires to sort a stack of numbers using a limited set of operations. See the [subject](https://github.com/VirgileT/push_swap/blob/main/SUBJECT_push_swap.pdf)
+This project was a challenging task for me in the Ecole 42 curriculum, it requires to sort a stack of numbers using a limited set of operations.  
+See the [subject](https://github.com/VirgileT/push_swap/blob/main/SUBJECT_push_swap.pdf)
 
 ## Project Overview
 
